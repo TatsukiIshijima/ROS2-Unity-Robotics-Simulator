@@ -7,7 +7,7 @@ using UnityEngine;
 
 // https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/main/Nav2SLAMExampleProject/Assets/Scripts/ROSClockPublisher.cs
 
-namespace Robotics.Simulator
+namespace Robotics.Simulator.Publisher
 {
     public class RosClockPublisher : MonoBehaviour
     {

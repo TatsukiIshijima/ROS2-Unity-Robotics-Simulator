@@ -4,7 +4,7 @@ using RosMessageTypes.BuiltinInterfaces;
 
 // https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/main/Nav2SLAMExampleProject/Assets/Scripts/TimeStamp.cs
 
-namespace Unity.Robotics.Core
+namespace Robotics.Simulator.Core
 {
     public readonly struct TimeStamp
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 // https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/main/Nav2SLAMExampleProject/Assets/Scripts/Clock.cs
 
-namespace Unity.Robotics.Core
+namespace Robotics.Simulator.Core
 {
     public static class Clock
     {

@@ -1,5 +1,8 @@
+using Robotics.Simulator.Core;
 using Robotics.Simulator.Sensor;
+using RosMessageTypes.BuiltinInterfaces;
 using RosMessageTypes.Sensor;
+using RosMessageTypes.Std;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 
@@ -15,10 +18,9 @@ namespace Robotics.Simulator.Publisher
     public class RgbCameraImagePublisher : MonoBehaviour
     {
         private const string TopicName = "/camera/rgb/image/compressed";
+        private const string FrameId = "camera_data";
 
         private ROSConnection _rosConnection;
-
-        private CompressedImageMsg _compressedImageMsg;
 
         private RgbCamera _rgbCamera;
 
@@ -26,11 +28,6 @@ namespace Robotics.Simulator.Publisher
         {
             _rosConnection = ROSConnection.GetOrCreateInstance();
             _rosConnection.RegisterPublisher<CompressedImageMsg>(TopicName);
-
-            _compressedImageMsg = new CompressedImageMsg();
-            // TODO : set frame id
-            // _compressedImageMsg.header;
-
             _rgbCamera = GetComponent<RgbCamera>();
         }
 
@@ -38,10 +35,23 @@ namespace Robotics.Simulator.Publisher
         {
             _rgbCamera.LoadTexture(data =>
             {
-                // set header(時間？)
-                // _compressedImageMsg.header;
-                _compressedImageMsg.data = data;
-                _rosConnection.Publish(TopicName, _compressedImageMsg);
+                var timeStamp = new TimeStamp(Clock.time);
+                var compressedImageMsg = new CompressedImageMsg
+                {
+                    header = new HeaderMsg
+                    {
+                        frame_id = FrameId,
+                        stamp = new TimeMsg
+                        {
+                            sec = timeStamp.Seconds,
+                            nanosec = timeStamp.NanoSeconds
+                        }
+                    },
+                    // RgbCamera側がEncodeToJPGにしているためjpegに設定
+                    format = "jpeg",
+                    data = data
+                };
+                _rosConnection.Publish(TopicName, compressedImageMsg);
             }, error => Debug.LogError(error));
         }
     }

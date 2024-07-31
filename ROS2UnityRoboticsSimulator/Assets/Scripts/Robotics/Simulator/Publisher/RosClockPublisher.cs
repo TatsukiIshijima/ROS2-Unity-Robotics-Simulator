@@ -17,6 +17,8 @@ namespace Robotics.Simulator.Publisher
 
         [SerializeField] private double publishRateHz = 100f;
 
+        private const string TopicName = "clock";
+        
         private double _lastPublishTimeSeconds;
 
         private ROSConnection _rosConnection;
@@ -59,9 +61,10 @@ namespace Robotics.Simulator.Publisher
          */
         private void Start()
         {
+            // TODO:Awakeに移動しても良い？
             SetClockMode(clockMode);
             _rosConnection = ROSConnection.GetOrCreateInstance();
-            _rosConnection.RegisterPublisher<ClockMsg>("clock");
+            _rosConnection.RegisterPublisher<ClockMsg>(TopicName);
         }
 
         private void PublishMessage()
@@ -73,7 +76,7 @@ namespace Robotics.Simulator.Publisher
                 nanosec = (uint)((publishTime - Math.Floor(publishTime)) * Clock.k_NanoSecondsInSeconds)
             };
             _lastPublishTimeSeconds = publishTime;
-            _rosConnection.Publish("clock", clockMsg);
+            _rosConnection.Publish(TopicName, clockMsg);
         }
 
         /**

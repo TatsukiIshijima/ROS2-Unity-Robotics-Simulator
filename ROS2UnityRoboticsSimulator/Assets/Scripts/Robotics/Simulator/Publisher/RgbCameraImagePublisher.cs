@@ -31,7 +31,7 @@ namespace Robotics.Simulator.Publisher
             _rgbCamera = GetComponent<RgbCamera>();
         }
 
-        private void Start()
+        private void Update()
         {
             _rgbCamera.LoadTexture(data =>
             {

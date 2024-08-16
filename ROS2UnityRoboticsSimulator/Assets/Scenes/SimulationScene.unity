@@ -181,13 +181,68 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2848956545337060223, guid: 581b84ef57339314c92df1cef0a06b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 628812023}
+    - targetCorrespondingSourceObject: {fileID: 2848956545337060223, guid: 581b84ef57339314c92df1cef0a06b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 628812024}
   m_SourcePrefab: {fileID: 100100000, guid: 581b84ef57339314c92df1cef0a06b47, type: 3}
 --- !u!4 &251402615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
   m_PrefabInstance: {fileID: 1481222167}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &628812021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2848956545337060223, guid: 581b84ef57339314c92df1cef0a06b47, type: 3}
+  m_PrefabInstance: {fileID: 22108280}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &628812023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628812021}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acef0b79454c9b4dae3f8139bc4ba77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RosIPAddress: 127.0.0.1
+  m_RosPort: 10000
+  m_ConnectOnStart: 1
+  m_KeepaliveTime: 1
+  m_NetworkTimeoutSeconds: 2
+  m_SleepTimeSeconds: 0.01
+  m_ShowHUD: 1
+  m_TFTopics:
+  - /tf
+  listenForTFMessages: 1
+--- !u!114 &628812024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628812021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acef0b79454c9b4dae3f8139bc4ba77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RosIPAddress: 127.0.0.1
+  m_RosPort: 10000
+  m_ConnectOnStart: 1
+  m_KeepaliveTime: 1
+  m_NetworkTimeoutSeconds: 2
+  m_SleepTimeSeconds: 0.01
+  m_ShowHUD: 1
+  m_TFTopics:
+  - /tf
+  listenForTFMessages: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,8 +422,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08715578, y: -0, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 2.5, z: -5.25}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 1.3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -449,6 +504,14 @@ PrefabInstance:
     - target: {fileID: 4808473549460451271, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
       propertyPath: m_Name
       value: SimpleRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4808473549460451271, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062191488217151950, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
       propertyPath: m_LocalScale.x
@@ -570,6 +633,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 55144702716469819, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 420629775151748022, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
       propertyPath: _end.y
       value: 1.25
@@ -578,13 +645,17 @@ PrefabInstance:
       propertyPath: _start.y
       value: 1.25
       objectReference: {fileID: 0}
+    - target: {fileID: 494252533766093691, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4424007530484780791, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
       propertyPath: m_Name
       value: DemoRobot
       objectReference: {fileID: 0}
     - target: {fileID: 4424007530484780791, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4848946299724817625, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
       propertyPath: m_Enabled
@@ -592,6 +663,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4848946299724817625, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
       propertyPath: m_TargetDisplay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040941792253456263, guid: 1508d86d50ab64399ae7fe25d9fda399, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

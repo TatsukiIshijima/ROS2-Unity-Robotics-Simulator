@@ -152,7 +152,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4808473549460451271}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -284,6 +284,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6811169780886380934}
     m_Modifications:
+    - target: {fileID: -940130103492396603, guid: 0cbfc9834ae514990bc59022dc512282, type: 3}
+      propertyPath: wheelCollider
+      value: 
+      objectReference: {fileID: 8191312190534317733}
+    - target: {fileID: -940130103492396603, guid: 0cbfc9834ae514990bc59022dc512282, type: 3}
+      propertyPath: maxMotorTorque
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1021817116422102707, guid: 0cbfc9834ae514990bc59022dc512282, type: 3}
       propertyPath: m_Name
       value: RightDCMotor
@@ -361,6 +369,14 @@ PrefabInstance:
     - target: {fileID: 1177611091328837593, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
       propertyPath: m_Name
       value: CenterWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288222827717557456, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523194697499210712, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+      propertyPath: m_Mass
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6114521320289736182, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
       propertyPath: m_LocalScale.x
@@ -441,6 +457,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6811169780886380934}
     m_Modifications:
+    - target: {fileID: -940130103492396603, guid: 0cbfc9834ae514990bc59022dc512282, type: 3}
+      propertyPath: wheelCollider
+      value: 
+      objectReference: {fileID: 136132492943261047}
+    - target: {fileID: -940130103492396603, guid: 0cbfc9834ae514990bc59022dc512282, type: 3}
+      propertyPath: maxMotorTorque
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1021817116422102707, guid: 0cbfc9834ae514990bc59022dc512282, type: 3}
       propertyPath: m_Name
       value: LeftDCMotor
@@ -519,6 +543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftWheel
       objectReference: {fileID: 0}
+    - target: {fileID: 3523194697499210712, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+      propertyPath: m_Mass
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6114521320289736182, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -576,6 +604,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+--- !u!146 &136132492943261047 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 3523194697499210712, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+  m_PrefabInstance: {fileID: 3532868500169133743}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7339848765787052889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6114521320289736182, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
@@ -592,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 1177611091328837593, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
       propertyPath: m_Name
       value: RightWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523194697499210712, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+      propertyPath: m_Mass
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6114521320289736182, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
       propertyPath: m_LocalScale.x
@@ -653,5 +690,10 @@ PrefabInstance:
 --- !u!4 &1554482247309529227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6114521320289736182, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
+  m_PrefabInstance: {fileID: 4704438485365622141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!146 &8191312190534317733 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 3523194697499210712, guid: c0649baabf5f2497daaa2a5841234a85, type: 3}
   m_PrefabInstance: {fileID: 4704438485365622141}
   m_PrefabAsset: {fileID: 0}

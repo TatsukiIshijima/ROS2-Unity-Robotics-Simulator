@@ -183,6 +183,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 581b84ef57339314c92df1cef0a06b47, type: 3}
+--- !u!4 &251402615 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
+  m_PrefabInstance: {fileID: 1481222167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,12 +367,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 10, z: -25}
+  m_LocalRotation: {x: 0.08715578, y: -0, z: -0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 2.5, z: -5.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 251402615}
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!850595691 &1080856075
 LightingSettings:
@@ -463,11 +468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.14
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.22
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -499,7 +504,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6811169780886380934, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 963194228}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f7e28cd86dfa4523bf9cea171bab9fb, type: 3}
 --- !u!1001 &7406029459582478207
@@ -595,7 +603,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 22108280}
   - {fileID: 7406029459582478207}

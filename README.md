@@ -10,6 +10,7 @@ ROS2-Unity-Robotics-Simulator/
 create by [tree.nathanfriend.id](https://tree.nathanfriend.io/)
 
 # Setup host（Ubuntu on Docker）
+Dockerfile is based on [Tiryoh/docker-ros2-desktop-vnc/humble](https://github.com/Tiryoh/docker-ros2-desktop-vnc/tree/master/humble).
 ## Build image and launch container
 1. Build ROS2 docker image if not create image.
 ```

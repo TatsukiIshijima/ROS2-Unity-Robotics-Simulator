@@ -70,3 +70,8 @@ coverage.xml
 /htmlcov/
 
 **/UserSettings/*
+
+# colcon/CMake output
+build
+install
+log

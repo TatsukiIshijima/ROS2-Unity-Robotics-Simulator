@@ -1,0 +1,11 @@
+services:
+  host:
+    build: 
+      context: .
+      shm_size: '512m'
+    image: ros2-decktop-vnc:humble
+    volumes:
+      - ${PWD}/colcon_ws:/home/ubuntu/colcon_ws
+    ports:
+      - "10000:10000"
+    # command: 

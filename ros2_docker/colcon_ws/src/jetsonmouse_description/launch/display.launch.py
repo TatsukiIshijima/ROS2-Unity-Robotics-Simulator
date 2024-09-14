@@ -8,7 +8,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     jetson_mouse_description_path = FindPackageShare('jetsonmouse_description')
-    default_model_path = PathJoinSubstitution(['urdf', 'raspimouse.urdf'])
+    default_model_path = PathJoinSubstitution(['urdf', 'jetsonmouse.urdf'])
     default_rviz_config_path = PathJoinSubstitution([jetson_mouse_description_path, 'rviz', 'urdf.rviz'])
 
     # These parameters are maintained for backwards compatibility
@@ -21,12 +21,12 @@ def generate_launch_description():
 
     # This parameter has changed its meaning slightly from previous versions
     ld.add_action(DeclareLaunchArgument(name='model', default_value=default_model_path,
-                                        description='Path to robot urdf file relative to raspimouse_description package'))
+                                        description='Path to robot urdf file relative to jetsonmouse_description package'))
 
     ld.add_action(IncludeLaunchDescription(
         PathJoinSubstitution([FindPackageShare('urdf_launch'), 'launch', 'display.launch.py']),
         launch_arguments={
-            'urdf_package': 'raspimouse_description',
+            'urdf_package': 'jetsonmouse_description',
             'urdf_package_path': LaunchConfiguration('model'),
             'rviz_config': LaunchConfiguration('rvizconfig'),
             'jsp_gui': LaunchConfiguration('gui')}.items()

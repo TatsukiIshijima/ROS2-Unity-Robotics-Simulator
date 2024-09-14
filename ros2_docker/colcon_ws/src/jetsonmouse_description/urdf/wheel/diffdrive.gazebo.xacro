@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="diffdrive_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find raspimouse_description)/urdf/common.xacro" />
+  <xacro:include filename="$(find jetsonmouse_description)/urdf/common.xacro" />
 
   <xacro:macro name="diffdrive_gazebo" params="publish_tf publish_jointstate robot_namespace">
     <gazebo>
@@ -40,13 +40,13 @@
         <wheelAcceleration>0</wheelAcceleration>
 
         <!-- Set to true to publish /odom (nav_msgs::Odometry), defaults to true -->
-        <publishTf>${publish_tf}</publishTf>
+        <publishTf>$(arg tf)</publishTf>
         <!-- Set to true to publish transforms for the wheel links, defaults to false -->
-        <publishWheelTF>${publish_tf}</publishWheelTF>
+        <publishWheelTF>$(arg tf)</publishWheelTF>
         <!-- Set to true to publish transforms for the odometry, defaults to true -->
-        <publishOdomTF>${publish_tf}</publishOdomTF>
+        <publishOdomTF>$(arg tf)</publishOdomTF>
         <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
-        <publishWheelJointState>${publish_jointstate}</publishWheelJointState>
+        <publishWheelJointState>$(arg jointstate)</publishWheelJointState>
       </plugin>
     </gazebo>
   </xacro:macro>

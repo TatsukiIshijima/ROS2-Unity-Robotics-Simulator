@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>raspimouse_description</name>
+  <name>jetsonmouse_description</name>
   <version>0.0.0</version>
-  <description>The raspimouse_description package from Unity-ROS-MobileRObot-UI-Tutorial</description>
+  <description>The jetsonmouse_description package from jnmouse_description</description>
   <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
   
   <license>MIT</license>
-  <url>https://github.com/unity3d-jp/Unity-ROS-MobileRobot-UI-Tutorial</url>
+  <url>https://github.com/rt-net/jnmouse_description</url>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <exec_depend>urdf_launch</exec_depend>

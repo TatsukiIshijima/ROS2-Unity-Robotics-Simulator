@@ -7,9 +7,9 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     ld = LaunchDescription()
 
-    raspi_mouse_description_path = FindPackageShare('raspimouse_description')
+    jetson_mouse_description_path = FindPackageShare('jetsonmouse_description')
     default_model_path = PathJoinSubstitution(['urdf', 'raspimouse.urdf'])
-    default_rviz_config_path = PathJoinSubstitution([raspi_mouse_description_path, 'rviz', 'urdf.rviz'])
+    default_rviz_config_path = PathJoinSubstitution([jetson_mouse_description_path, 'rviz', 'urdf.rviz'])
 
     # These parameters are maintained for backwards compatibility
     gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],

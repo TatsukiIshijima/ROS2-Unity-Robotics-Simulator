@@ -4,3 +4,6 @@
 [submodule "ros2_docker/colcon_ws/src/urdf_tutorial"]
 	path = ros2_docker/colcon_ws/src/urdf_tutorial
 	url = https://github.com/ros/urdf_tutorial.git
+[submodule "ros2_docker/colcon_ws/src/Unity-ROS-MobileRobot-UI-Tutorial"]
+	path = ros2_docker/colcon_ws/src/Unity-ROS-MobileRobot-UI-Tutorial
+	url = https://github.com/unity3d-jp/Unity-ROS-MobileRobot-UI-Tutorial.git

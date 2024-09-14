@@ -4,3 +4,6 @@
 [submodule "ros2_docker/colcon_ws/src/urdf_tutorial"]
 	path = ros2_docker/colcon_ws/src/urdf_tutorial
 	url = https://github.com/ros/urdf_tutorial.git
+[submodule "ros2_docker/colcon_ws/src/raspimouse_description"]
+	path = ros2_docker/colcon_ws/src/raspimouse_description
+	url = https://github.com/rt-net/raspimouse_description.git

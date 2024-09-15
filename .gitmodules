@@ -4,3 +4,6 @@
 [submodule "ros2_docker/colcon_ws/src/raspimouse_description"]
 	path = ros2_docker/colcon_ws/src/raspimouse_description
 	url = https://github.com/rt-net/raspimouse_description.git
+[submodule "ros2_docker/colcon_ws/src/realsense2_description"]
+	path = ros2_docker/colcon_ws/src/realsense2_description
+	url = https://github.com/issaiass/realsense2_description.git

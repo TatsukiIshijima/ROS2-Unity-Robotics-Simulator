@@ -1,11 +1,21 @@
-# Configurations
+# Structure
 ```
 ROS2-Unity-Robotics-Simulator/
 ├── ros2_docker/
 │   └── colcon_ws/
 │       └── src/
+│           ├── jetsonmouse_description
+│           ├── raspimouse_description
 │           └── ROS-TCP-Endpoint
-└── ROS2UnityRoboticsSimulator
+├── ROS2UnityRoboticsSimulator/
+│   └── Assets/
+│       ├── Materials
+│       ├── Prefabs
+│       ├── Resources
+│       ├── Scenes
+│       └── Urdf
+└── script/
+    └── sync_description.sh
 ```
 create by [tree.nathanfriend.id](https://tree.nathanfriend.io/)
 
@@ -47,6 +57,30 @@ ROS-TCP-Endpoint is used for communication between ROS and Unity. Enter the cont
 #source install/setup.bash
 #ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=0.0.0.0
 ```
+
+# ROS package manager(rosdep)
+The packages on which ROS packages depend are described in the `package.xml` of each package. We can install packages that the package depends on by executing `rosdep install`.
+
+example
+```
+#sudo apt update
+#rosdep install -i --from-paths [ros package path]
+```
+
+# ROS package build
+```
+#cd colcon_ws
+#colcon build --packages-select [ros package name]
+```
+
+# URDF import for Unity
+To import and use URDF on the Unity, use URDF-Importer. We need to copy the ROS2 URDF package and URDF to UnityProject/Assets/Urdf in order to load the URDF using URDF-Importer. Synchronize folders using `sync_description.sh`.If you use another URDF package, add the package name to `PACKAGES_DIR_NAMES` in `sync_description.sh`.
+
+```
+#./sync_description.sh
+```
+
+The URDF file and package will be copied under UnityProject/Assets/Urdf. Select the URDF file on Unity and execute “Import Robot from selected URDF file”. Then a URDF GameObject is created on the Scene.
 
 # Demos(WIP)
 ## View camera image published by Unity(Robot)

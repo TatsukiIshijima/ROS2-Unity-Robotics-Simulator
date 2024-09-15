@@ -73,6 +73,27 @@ example
 #colcon build --packages-select [ros package name]
 ```
 
+# xacro convert to urdf
+The xacro file cannot be used by the URDF-Importer and must be converted to a URDF file. The following xacro commands can be used for conversion.
+
+```
+#xacro [xacro file] [(option)xacro param] [output urdf file name]
+```
+
+example
+```
+#xacro raspimouse.urdf.xacro use_rgb_camera:=true lidar:=urg > raspimouse_with_camera_urg.urdf
+```
+
+Since the URDF for raspimouse_description depends on realsense2_description, the following parts of the exported URDF (raspimouse.urdf, raspimouse_with_camera_lds.urdf, raspimouse_ with_camera_rplidar, raspimouse_with_camera_urg) are changed as follows. This allows the URDF-Importer to resolve dependencies.
+
+```diff
+<geometry>
+-    <mesh filename="file://ros/humble/share/realsense2_description/meshes/d435.dae"/>
++    <mesh filename="package://realsense2_description/meshes/d435.dae"/>
+</geometry>
+```
+
 # URDF import for Unity
 To import and use URDF on the Unity, use URDF-Importer. We need to copy the ROS2 URDF package and URDF to UnityProject/Assets/Urdf in order to load the URDF using URDF-Importer. Synchronize folders using `sync_description.sh`.If you use another URDF package, add the package name to `PACKAGES_DIR_NAMES` in `sync_description.sh`.
 

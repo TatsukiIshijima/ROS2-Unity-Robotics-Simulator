@@ -3024,6 +3024,8 @@ GameObject:
   - component: {fileID: 461816654}
   - component: {fileID: 461816653}
   - component: {fileID: 461816652}
+  - component: {fileID: 461816657}
+  - component: {fileID: 461816656}
   m_Layer: 0
   m_Name: rf_lightsensor_link
   m_TagString: Untagged
@@ -3161,6 +3163,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 0
+--- !u!114 &461816656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461816650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8dd1847c7a45c1924f58a4801c5e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /infrared/rf/range
+  frameId: range_data
+--- !u!114 &461816657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461816650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b8b806badd43bbb4bba628a9846384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRange: 0.1
+  maxRange: 0.8
 --- !u!1 &463534442
 GameObject:
   m_ObjectHideFlags: 8
@@ -6515,6 +6545,8 @@ GameObject:
   - component: {fileID: 1193392826}
   - component: {fileID: 1193392825}
   - component: {fileID: 1193392824}
+  - component: {fileID: 1193392829}
+  - component: {fileID: 1193392828}
   m_Layer: 0
   m_Name: ls_lightsensor_link
   m_TagString: Untagged
@@ -6652,6 +6684,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 0
+--- !u!114 &1193392828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193392822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8dd1847c7a45c1924f58a4801c5e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /infrared/ls/range
+  frameId: range_data
+--- !u!114 &1193392829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193392822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b8b806badd43bbb4bba628a9846384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRange: 0.1
+  maxRange: 0.8
 --- !u!1 &1219084510
 GameObject:
   m_ObjectHideFlags: 0
@@ -8626,6 +8686,8 @@ GameObject:
   - component: {fileID: 1677508118}
   - component: {fileID: 1677508117}
   - component: {fileID: 1677508116}
+  - component: {fileID: 1677508120}
+  - component: {fileID: 1677508121}
   m_Layer: 0
   m_Name: lf_lightsensor_link
   m_TagString: Untagged
@@ -8763,6 +8825,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 0
+--- !u!114 &1677508120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677508114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b8b806badd43bbb4bba628a9846384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRange: 0.1
+  maxRange: 0.8
+--- !u!114 &1677508121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677508114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8dd1847c7a45c1924f58a4801c5e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /infrared/lf/range
+  frameId: range_data
 --- !u!1 &1688159055
 GameObject:
   m_ObjectHideFlags: 0
@@ -10913,6 +11003,8 @@ GameObject:
   - component: {fileID: 2006189824}
   - component: {fileID: 2006189823}
   - component: {fileID: 2006189822}
+  - component: {fileID: 2006189827}
+  - component: {fileID: 2006189826}
   m_Layer: 0
   m_Name: rs_lightsensor_link
   m_TagString: Untagged
@@ -11050,6 +11142,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 0
+--- !u!114 &2006189826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006189820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8dd1847c7a45c1924f58a4801c5e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /infrared/rs/range
+  frameId: range_data
+--- !u!114 &2006189827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006189820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b8b806badd43bbb4bba628a9846384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRange: 0.1
+  maxRange: 0.8
 --- !u!1 &2030593970
 GameObject:
   m_ObjectHideFlags: 8

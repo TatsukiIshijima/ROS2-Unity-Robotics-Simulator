@@ -17,17 +17,16 @@ namespace Robotics.Simulator.Publisher
     [RequireComponent(typeof(RgbCamera))]
     public class RgbCameraImagePublisher : MonoBehaviour
     {
-        private const string TopicName = "/camera/rgb/image/compressed";
-        private const string FrameId = "camera_data";
+        [SerializeField] private string topicName = "/camera/rgb/image/compressed";
+        [SerializeField] private string frameId = "camera_data";
 
         private ROSConnection _rosConnection;
-
         private RgbCamera _rgbCamera;
 
         private void Awake()
         {
             _rosConnection = ROSConnection.GetOrCreateInstance();
-            _rosConnection.RegisterPublisher<CompressedImageMsg>(TopicName);
+            _rosConnection.RegisterPublisher<CompressedImageMsg>(topicName);
             _rgbCamera = GetComponent<RgbCamera>();
         }
 
@@ -40,7 +39,7 @@ namespace Robotics.Simulator.Publisher
                 {
                     header = new HeaderMsg
                     {
-                        frame_id = FrameId,
+                        frame_id = frameId,
                         stamp = new TimeMsg
                         {
                             sec = timeStamp.Seconds,
@@ -51,7 +50,7 @@ namespace Robotics.Simulator.Publisher
                     format = "jpeg",
                     data = data
                 };
-                _rosConnection.Publish(TopicName, compressedImageMsg);
+                _rosConnection.Publish(topicName, compressedImageMsg);
             }, error => Debug.LogError(error));
         }
     }

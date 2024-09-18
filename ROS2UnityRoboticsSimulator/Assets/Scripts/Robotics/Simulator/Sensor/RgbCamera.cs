@@ -27,7 +27,6 @@ namespace Robotics.Simulator.Sensor
         private Camera _camera;
         private RenderTexture _renderTexture;
         private Texture2D _texture;
-        private float _time;
         private float _dt;
         private float _frequencyInv;
 
@@ -55,8 +54,6 @@ namespace Robotics.Simulator.Sensor
             {
                 return;
             }
-            
-            _time = Time.time;
             
             if (SystemInfo.supportsAsyncGPUReadback)
             {

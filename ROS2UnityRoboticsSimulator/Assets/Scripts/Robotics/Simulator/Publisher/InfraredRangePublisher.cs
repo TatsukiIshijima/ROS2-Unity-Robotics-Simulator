@@ -1,4 +1,3 @@
-using System;
 using Robotics.Simulator.Core;
 using Robotics.Simulator.Sensor;
 using RosMessageTypes.BuiltinInterfaces;
@@ -13,7 +12,7 @@ namespace Robotics.Simulator.Publisher
     public class InfraredRangePublisher : MonoBehaviour
     {
         [SerializeField] private string topicName;
-        [SerializeField] private string frameId;
+        [SerializeField] private string frameId = "range_data";
 
         private ROSConnection _rosConnection;
         private InfraredSensor infraredSensor;

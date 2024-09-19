@@ -2,7 +2,16 @@ using System;
 using Unity.Robotics.UrdfImporter.Control;
 using UnityEngine;
 
-// https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/main/Nav2SLAMExampleProject/Assets/Scripts/AGVController.cs
+/***
+ * AGVController.cs
+ *
+ * https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/main/Nav2SLAMExampleProject/Assets/Scripts/AGVController.cs
+ *
+ * URDFImporterでインポートしたURDFモデルのArticulationBodyを使ってモデルを制御するスクリプト
+ * より厳密にシミュレーションしたい場合はこちらの方が適しているが、RaspiMouseモデルにアタッチした時は少し動かすだけで振動が発生するなどの問題がある
+ * 上記リポジトリではこれらに対応するためにインポートしたTurtlebot3のURDFモデルに摩擦のないキャスターなどを追加している（以下）
+ * https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/main/readmes/explanation.md#turtlebot3manualconfig
+ */
 
 namespace Robotics.Simulator.Controller
 {

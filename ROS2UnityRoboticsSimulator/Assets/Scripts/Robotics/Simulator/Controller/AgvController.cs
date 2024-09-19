@@ -6,12 +6,6 @@ using UnityEngine;
 
 namespace Robotics.Simulator.Controller
 {
-    internal enum ControlMode
-    {
-        Keyboard,
-        Ros
-    };
-
     public class AgvController : MonoBehaviour
     {
         [SerializeField] private GameObject wheel1;

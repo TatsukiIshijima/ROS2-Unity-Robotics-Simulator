@@ -12,13 +12,16 @@ namespace Robotics.Simulator.Controller
     public class BasicController : MonoBehaviour
     {
         [SerializeField] private GameObject robot;
+        [SerializeField] private GameObject leftWheel;
+        [SerializeField] private GameObject rightWheel;
         [SerializeField] private ControlMode mode = ControlMode.Keyboard;
         [SerializeField] private float robotMass = 0.75f; // kg
-        [SerializeField] private float maxLinearSpeed = 0.25f; // m/s
+        [SerializeField] private float maxLinearSpeed = 0.5f; // m/s
         [SerializeField] private float maxAngularSpeed = 1.0f; // rad/s
-        // [SerializeField] private float wheelRadius = 0.024f; // meters
         [SerializeField] private float trackWidth = 0.08f; // meters Distance between tyres
-        
+
+        private float leftWheelSpeed;
+        private float rightWheelSpeed;
         private float linearSpeed; // m/s
         private float angularSpeed; // rad/s
         private float theta; // degrees
@@ -41,6 +44,7 @@ namespace Robotics.Simulator.Controller
             var newTransform = CalcRobotTransform(deltaTimeSeconds);
             robot.transform.position = newTransform.Position.ToVector3();
             robot.transform.rotation = newTransform.Rotation.ToQuaternion();
+            RotateWheels(deltaTimeSeconds);
         }
 
         private void DisableArticulationBody()
@@ -83,11 +87,14 @@ namespace Robotics.Simulator.Controller
             }
         }
 
+        private float x;
+        private float z;
+
         private RobotTransform CalcRobotTransform(float deltaTimeSeconds)
         {
-            var leftWheelSpeed = linearSpeed - (angularSpeed * trackWidth / 2.0f);
-            var rightWheelSpeed = linearSpeed + (angularSpeed * trackWidth / 2.0f);
-            
+            leftWheelSpeed = linearSpeed - (angularSpeed * trackWidth / 2.0f);
+            rightWheelSpeed = linearSpeed + (angularSpeed * trackWidth / 2.0f);
+
             var robotLinerSpeed = (leftWheelSpeed + rightWheelSpeed) / 2.0f; // m/s
             var robotAngularSpeed = (rightWheelSpeed - leftWheelSpeed) / trackWidth; // rad/s
 
@@ -112,6 +119,14 @@ namespace Robotics.Simulator.Controller
             );
 
             return new RobotTransform(newRobotPosition, newRobotRotation);
+        }
+
+        private void RotateWheels(float deltaTimeSeconds)
+        {
+            var leftWheelRotation = Quaternion.Euler(0, leftWheelSpeed * Mathf.Rad2Deg * deltaTimeSeconds, 0);
+            var rightWheelRotation = Quaternion.Euler(0, rightWheelSpeed * Mathf.Rad2Deg * deltaTimeSeconds, 0);
+            leftWheel.transform.rotation *= leftWheelRotation;
+            rightWheel.transform.rotation *= rightWheelRotation;
         }
     }
 }

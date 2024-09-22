@@ -1,14 +1,15 @@
-using System;
 using System.Linq;
 using Robotics.Simulator.Core;
 using Robotics.Simulator.Core.Model;
-using Unity.Robotics.UrdfImporter;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Util;
 
 namespace Robotics.Simulator.Controller
 {
+    /**
+     * BasicController is a simple controller that moves the robot based on keyboard input or ROS.
+     * This script controls the position and rotation of the robot, ignoring friction and other physical effects.
+     */
     public class BasicController : MonoBehaviour
     {
         [SerializeField] private GameObject robot;

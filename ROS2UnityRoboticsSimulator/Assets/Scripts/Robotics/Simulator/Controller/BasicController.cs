@@ -13,21 +13,20 @@ namespace Robotics.Simulator.Controller
     {
         [SerializeField] private GameObject robot;
         [SerializeField] private ControlMode mode = ControlMode.Keyboard;
-        [SerializeField] private float maxMotorTorque = 0.25f; // N/m
-        [SerializeField] private float wheelMass = 0.0113f; // kg
-        [SerializeField] private float wheelRadius = 0.024f; // meters
+        [SerializeField] private float robotMass = 0.75f; // kg
+        [SerializeField] private float maxLinearSpeed = 0.25f; // m/s
+        [SerializeField] private float maxAngularSpeed = 1.0f; // rad/s
+        // [SerializeField] private float wheelRadius = 0.024f; // meters
         [SerializeField] private float trackWidth = 0.08f; // meters Distance between tyres
-
-        private float _leftTorque = 0f; // N/m
-        private float _rightTorque = 0f; // N/m
-        private float _inertia; // kg*m^2
+        
+        private float linearSpeed; // m/s
+        private float angularSpeed; // rad/s
+        private float theta; // degrees
 
         private void Awake()
         {
             DisableArticulationBody();
-
-            // cylinder inertia = 0.5 * m * r^2
-            _inertia = 0.5f * wheelMass * Mathf.Pow(wheelRadius, 2);
+            AddRigidBody();
         }
 
         private void FixedUpdate()
@@ -44,42 +43,6 @@ namespace Robotics.Simulator.Controller
             robot.transform.rotation = newTransform.Rotation.ToQuaternion();
         }
 
-        private void KeyboardUpdate()
-        {
-            var moveDirection = Input.GetAxis("Vertical");
-            var rotateDirection = Input.GetAxis("Horizontal");
-
-            switch (moveDirection)
-            {
-                case 0:
-                    _leftTorque = 0;
-                    _rightTorque = 0;
-                    break;
-                case > 0:
-                    _leftTorque = maxMotorTorque;
-                    _rightTorque = maxMotorTorque;
-                    break;
-                case < 0:
-                    _leftTorque = -1 * maxMotorTorque;
-                    _rightTorque = -1 * maxMotorTorque;
-                    break;
-            }
-
-            switch (rotateDirection)
-            {
-                case 0:
-                    break;
-                case > 0:
-                    _leftTorque = maxMotorTorque;
-                    _rightTorque = -1 * maxMotorTorque;
-                    break;
-                case < 0:
-                    _leftTorque = -1 * maxMotorTorque;
-                    _rightTorque = maxMotorTorque;
-                    break;
-            }
-        }
-
         private void DisableArticulationBody()
         {
             var robotComponents = ChildFinder.GetAllChildren(robot);
@@ -90,40 +53,65 @@ namespace Robotics.Simulator.Controller
             }
         }
 
-        private float CalculateWheelAngularVelocity(float deltaTimeSeconds, float torque)
+        private void AddRigidBody()
         {
-            var angularAcceleration = torque / _inertia; // rad/s^2
-            return angularAcceleration * deltaTimeSeconds; // rad/s
+            var rigidBody = robot.AddComponent<Rigidbody>();
+            rigidBody.mass = robotMass;
         }
 
-        private float CalculateWheelLinearVelocity(float angularVelocity)
+        private void KeyboardUpdate()
         {
-            return angularVelocity * wheelRadius; // m/s
+            linearSpeed = 0;
+            angularSpeed = 0;
+
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                linearSpeed = maxLinearSpeed;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                linearSpeed = -maxLinearSpeed;
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                angularSpeed = -maxAngularSpeed;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                angularSpeed = maxAngularSpeed;
+            }
         }
 
         private RobotTransform CalcRobotTransform(float deltaTimeSeconds)
         {
-            var leftWheelAngularVelocity = CalculateWheelAngularVelocity(deltaTimeSeconds, _leftTorque); // rad/s
-            var rightWheelAngularVelocity = CalculateWheelAngularVelocity(deltaTimeSeconds, _rightTorque); // rad/s
-            var leftWheelLinearVelocity = CalculateWheelLinearVelocity(leftWheelAngularVelocity); // m/s
-            var rightWheelLinearVelocity = CalculateWheelLinearVelocity(rightWheelAngularVelocity); // m/s
+            var leftWheelSpeed = linearSpeed - (angularSpeed * trackWidth / 2.0f);
+            var rightWheelSpeed = linearSpeed + (angularSpeed * trackWidth / 2.0f);
+            
+            var robotLinerSpeed = (leftWheelSpeed + rightWheelSpeed) / 2.0f; // m/s
+            var robotAngularSpeed = (rightWheelSpeed - leftWheelSpeed) / trackWidth; // rad/s
 
-            var robotVelocity = (leftWheelLinearVelocity + rightWheelLinearVelocity) / 2; // m/s
-            var robotAngularVelocity = (rightWheelLinearVelocity - leftWheelLinearVelocity) / trackWidth; // rad/s
+            var currentRobotPosition = robot.transform.position;
+            var currentRobotRotation = robot.transform.rotation;
 
-            var deltaTheta = robotAngularVelocity * deltaTimeSeconds; // rad
-            var deltaX = robotVelocity * deltaTimeSeconds * Mathf.Cos(deltaTheta);
-            var deltaZ = robotVelocity * deltaTimeSeconds * Mathf.Sin(deltaTheta);
+            var deltaX = robotLinerSpeed * Mathf.Sin(theta * Mathf.Deg2Rad) * deltaTimeSeconds;
+            var deltaZ = robotLinerSpeed * Mathf.Cos(theta * Mathf.Deg2Rad) * deltaTimeSeconds;
 
-            var x = robot.transform.position.x + deltaX;
-            var z = robot.transform.position.z + deltaZ;
-            var theta = (Mathf.Deg2Rad * robot.transform.rotation.y) + deltaTheta; // rad
-            var rotation = (Mathf.Rad2Deg * theta); // deg
-
-            return new RobotTransform(
-                new RobotPosition(x, robot.transform.position.y, z),
-                new RobotRotation(robot.transform.rotation.x, rotation, robot.transform.rotation.z)
+            var newRobotPosition = new RobotPosition(
+                currentRobotPosition.x + deltaX,
+                currentRobotPosition.y,
+                currentRobotPosition.z + deltaZ
             );
+
+            theta += robotAngularSpeed * Mathf.Rad2Deg * deltaTimeSeconds;
+
+            var newRobotRotation = new RobotRotation(
+                currentRobotRotation.x,
+                theta,
+                currentRobotRotation.z
+            );
+
+            return new RobotTransform(newRobotPosition, newRobotRotation);
         }
     }
 }

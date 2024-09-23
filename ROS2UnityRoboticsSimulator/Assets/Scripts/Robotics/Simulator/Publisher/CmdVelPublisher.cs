@@ -9,7 +9,7 @@ namespace Robotics.Simulator.Publisher
      */
     public class CmdVelPublisher : MonoBehaviour
     {
-        [SerializeField] private string topicName = "cmd_vel";
+        [SerializeField] private string topicName = Topic.CmdVel;
         [SerializeField] private float linearSpeed = 0.5f;
         [SerializeField] private float angularSpeed = 1.0f;
 

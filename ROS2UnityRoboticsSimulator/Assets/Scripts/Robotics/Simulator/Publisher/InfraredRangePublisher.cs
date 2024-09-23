@@ -12,21 +12,21 @@ namespace Robotics.Simulator.Publisher
     public class InfraredRangePublisher : MonoBehaviour
     {
         [SerializeField] private string topicName;
-        [SerializeField] private string frameId = "range_data";
+        [SerializeField] private string frameId = FrameId.InfraredRangeData;
 
         private ROSConnection _rosConnection;
-        private InfraredSensor infraredSensor;
+        private InfraredSensor _infraredSensor;
         
         private void Awake()
         {
             _rosConnection = ROSConnection.GetOrCreateInstance();
             _rosConnection.RegisterPublisher<RangeMsg>(topicName);
-            infraredSensor = GetComponent<InfraredSensor>();
+            _infraredSensor = GetComponent<InfraredSensor>();
         }
 
         private void Update()
         {
-            var range = infraredSensor.LoadDistance();
+            var range = _infraredSensor.LoadDistance();
             var timeStamp = new TimeStamp(Clock.time);
             var rangeMsg = new RangeMsg
             {
@@ -41,8 +41,8 @@ namespace Robotics.Simulator.Publisher
                 },
                 radiation_type = RangeMsg.INFRARED,
                 field_of_view = 0.1f,
-                min_range = infraredSensor.MinRange,
-                max_range = infraredSensor.MaxRange,
+                min_range = _infraredSensor.MinRange,
+                max_range = _infraredSensor.MaxRange,
                 range = range,
             };
             _rosConnection.Publish(topicName, rangeMsg);

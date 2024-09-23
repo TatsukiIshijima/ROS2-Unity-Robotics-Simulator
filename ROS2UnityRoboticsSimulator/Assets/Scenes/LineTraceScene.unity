@@ -1665,7 +1665,7 @@ GameObject:
   - component: {fileID: 196443545}
   - component: {fileID: 196443544}
   m_Layer: 5
-  m_Name: 'LeftButton '
+  m_Name: LeftButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5831,7 +5831,7 @@ MonoBehaviour:
   robot: {fileID: 918329730}
   leftWheel: {fileID: 460135370}
   rightWheel: {fileID: 1805523581}
-  mode: 0
+  mode: 1
   robotMass: 0.75
   maxLinearSpeed: 0.5
   maxAngularSpeed: 1
@@ -7509,6 +7509,8 @@ GameObject:
   - component: {fileID: 1187540721}
   - component: {fileID: 1187540723}
   - component: {fileID: 1187540722}
+  - component: {fileID: 1187540725}
+  - component: {fileID: 1187540724}
   m_Layer: 5
   m_Name: ControlPanel
   m_TagString: Untagged
@@ -7577,6 +7579,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187540720}
   m_CullTransparentMesh: 1
+--- !u!114 &1187540724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187540720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ed603caec84d6aa023b1ceede5d9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardButton: {fileID: 481187590}
+  backwardButton: {fileID: 1097855366}
+  leftButton: {fileID: 196443544}
+  rightButton: {fileID: 181888781}
+--- !u!114 &1187540725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187540720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c2651f47b54cc499e7181cdd51f911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: cmd_vel
+  linearSpeed: 0.5
+  angularSpeed: 1
 --- !u!1 &1190954911
 GameObject:
   m_ObjectHideFlags: 0

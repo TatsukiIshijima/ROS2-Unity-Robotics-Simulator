@@ -1,6 +1,8 @@
 using System.Linq;
 using Robotics.Simulator.Core;
 using Robotics.Simulator.Core.Model;
+using RosMessageTypes.Geometry;
+using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using Util;
 
@@ -21,11 +23,16 @@ namespace Robotics.Simulator.Controller
         [SerializeField] private float maxAngularSpeed = 1.0f; // rad/s
         [SerializeField] private float trackWidth = 0.08f; // meters Distance between tyres
 
-        private float leftWheelSpeed;
-        private float rightWheelSpeed;
-        private float linearSpeed; // m/s
-        private float angularSpeed; // rad/s
-        private float theta; // degrees
+        private float _leftWheelSpeed;
+        private float _rightWheelSpeed;
+        private float _robotLinearSpeed; // m/s
+        private float _robotAngularSpeed; // rad/s
+        private float _theta; // degrees
+
+        private ROSConnection _rosConnection;
+        private float _lastCmdReceivedTime;
+        private const string CmdVelTopicName = "cmd_vel";
+        private const float RosTimeout = 0.5f;
 
         private void Awake()
         {
@@ -33,13 +40,28 @@ namespace Robotics.Simulator.Controller
             AddRigidBody();
         }
 
+        private void Start()
+        {
+            if (mode != ControlMode.Ros) return;
+            _rosConnection = ROSConnection.GetOrCreateInstance();
+            _rosConnection.Subscribe<TwistMsg>(CmdVelTopicName, OnCmdVelReceived);
+        }
+
         private void FixedUpdate()
         {
             var deltaTimeSeconds = Clock.DeltaTimeInSeconds;
 
-            if (mode == ControlMode.Keyboard)
+            switch (mode)
             {
-                KeyboardUpdate();
+                case ControlMode.Keyboard:
+                    KeyboardUpdate(deltaTimeSeconds);
+                    break;
+                case ControlMode.Ros:
+                    RosUpdate(deltaTimeSeconds);
+                    break;
+                default:
+                    Debug.LogError("Unknown control mode");
+                    break;
             }
 
             var newTransform = CalcRobotTransform(deltaTimeSeconds);
@@ -64,46 +86,71 @@ namespace Robotics.Simulator.Controller
             rigidBody.mass = robotMass;
         }
 
-        private void KeyboardUpdate()
+        private void OnCmdVelReceived(TwistMsg twistMsg)
         {
-            linearSpeed = 0;
-            angularSpeed = 0;
+            _robotLinearSpeed = (float)twistMsg.linear.x;
+            _robotAngularSpeed = (float)twistMsg.angular.z;
+            _lastCmdReceivedTime = Time.time;
+        }
+
+        private void RosUpdate(float deltaTimeSeconds)
+        {
+            if (Time.time - _lastCmdReceivedTime > RosTimeout)
+            {
+                _robotLinearSpeed = 0;
+                _robotAngularSpeed = 0;
+            }
+
+            UpdateRobotTransform(deltaTimeSeconds);
+        }
+
+        private void KeyboardUpdate(float deltaTimeSeconds)
+        {
+            _robotLinearSpeed = 0;
+            _robotAngularSpeed = 0;
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                linearSpeed = maxLinearSpeed;
+                _robotLinearSpeed = maxLinearSpeed;
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
-                linearSpeed = -maxLinearSpeed;
+                _robotLinearSpeed = -maxLinearSpeed;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                angularSpeed = -maxAngularSpeed;
+                _robotAngularSpeed = -maxAngularSpeed;
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                angularSpeed = maxAngularSpeed;
+                _robotAngularSpeed = maxAngularSpeed;
             }
-        }
 
-        private float x;
-        private float z;
+            UpdateRobotTransform(deltaTimeSeconds);
+        }
+        
+        private void UpdateRobotTransform(float deltaTimeSeconds)
+        {
+            var newTransform = CalcRobotTransform(deltaTimeSeconds);
+            robot.transform.position = newTransform.Position.ToVector3();
+            robot.transform.rotation = newTransform.Rotation.ToQuaternion();
+            RotateWheels(deltaTimeSeconds);
+        }
 
         private RobotTransform CalcRobotTransform(float deltaTimeSeconds)
         {
-            leftWheelSpeed = linearSpeed - (angularSpeed * trackWidth / 2.0f);
-            rightWheelSpeed = linearSpeed + (angularSpeed * trackWidth / 2.0f);
+            _leftWheelSpeed = _robotLinearSpeed - (_robotAngularSpeed * trackWidth / 2.0f);
+            _rightWheelSpeed = _robotLinearSpeed + (_robotAngularSpeed * trackWidth / 2.0f);
 
-            var robotLinerSpeed = (leftWheelSpeed + rightWheelSpeed) / 2.0f; // m/s
-            var robotAngularSpeed = (rightWheelSpeed - leftWheelSpeed) / trackWidth; // rad/s
+            var robotLinerSpeed = (_leftWheelSpeed + _rightWheelSpeed) / 2.0f; // m/s
+            var robotAngularSpeed = (_rightWheelSpeed - _leftWheelSpeed) / trackWidth; // rad/s
 
             var currentRobotPosition = robot.transform.position;
             var currentRobotRotation = robot.transform.rotation;
 
-            var deltaX = robotLinerSpeed * Mathf.Sin(theta * Mathf.Deg2Rad) * deltaTimeSeconds;
-            var deltaZ = robotLinerSpeed * Mathf.Cos(theta * Mathf.Deg2Rad) * deltaTimeSeconds;
+            var deltaX = robotLinerSpeed * Mathf.Sin(_theta * Mathf.Deg2Rad) * deltaTimeSeconds;
+            var deltaZ = robotLinerSpeed * Mathf.Cos(_theta * Mathf.Deg2Rad) * deltaTimeSeconds;
 
             var newRobotPosition = new RobotPosition(
                 currentRobotPosition.x + deltaX,
@@ -111,11 +158,11 @@ namespace Robotics.Simulator.Controller
                 currentRobotPosition.z + deltaZ
             );
 
-            theta += robotAngularSpeed * Mathf.Rad2Deg * deltaTimeSeconds;
+            _theta += robotAngularSpeed * Mathf.Rad2Deg * deltaTimeSeconds;
 
             var newRobotRotation = new RobotRotation(
                 currentRobotRotation.x,
-                theta,
+                _theta,
                 currentRobotRotation.z
             );
 
@@ -124,8 +171,8 @@ namespace Robotics.Simulator.Controller
 
         private void RotateWheels(float deltaTimeSeconds)
         {
-            var leftWheelRotation = Quaternion.Euler(0, leftWheelSpeed * Mathf.Rad2Deg * deltaTimeSeconds, 0);
-            var rightWheelRotation = Quaternion.Euler(0, rightWheelSpeed * Mathf.Rad2Deg * deltaTimeSeconds, 0);
+            var leftWheelRotation = Quaternion.Euler(0, _leftWheelSpeed * Mathf.Rad2Deg * deltaTimeSeconds, 0);
+            var rightWheelRotation = Quaternion.Euler(0, _rightWheelSpeed * Mathf.Rad2Deg * deltaTimeSeconds, 0);
             leftWheel.transform.rotation *= leftWheelRotation;
             rightWheel.transform.rotation *= rightWheelRotation;
         }

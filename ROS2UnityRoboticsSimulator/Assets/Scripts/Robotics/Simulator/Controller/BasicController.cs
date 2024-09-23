@@ -1,6 +1,7 @@
 using System.Linq;
 using Robotics.Simulator.Core;
 using Robotics.Simulator.Core.Model;
+using Robotics.Simulator.Publisher;
 using RosMessageTypes.Geometry;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace Robotics.Simulator.Controller
 
         private ROSConnection _rosConnection;
         private float _lastCmdReceivedTime;
-        private const string CmdVelTopicName = "cmd_vel";
+        private const string CmdVelTopicName = Topic.CmdVel;
         private const float RosTimeout = 0.5f;
 
         private void Awake()
@@ -129,7 +130,7 @@ namespace Robotics.Simulator.Controller
 
             UpdateRobotTransform(deltaTimeSeconds);
         }
-        
+
         private void UpdateRobotTransform(float deltaTimeSeconds)
         {
             var newTransform = CalcRobotTransform(deltaTimeSeconds);

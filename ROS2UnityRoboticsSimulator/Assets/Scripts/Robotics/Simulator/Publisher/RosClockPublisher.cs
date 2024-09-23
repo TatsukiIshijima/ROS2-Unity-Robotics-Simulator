@@ -17,8 +17,8 @@ namespace Robotics.Simulator.Publisher
 
         [SerializeField] private double publishRateHz = 100f;
 
-        private const string TopicName = "clock";
-        
+        private const string TopicName = Topic.Clock;
+
         private double _lastPublishTimeSeconds;
 
         private ROSConnection _rosConnection;

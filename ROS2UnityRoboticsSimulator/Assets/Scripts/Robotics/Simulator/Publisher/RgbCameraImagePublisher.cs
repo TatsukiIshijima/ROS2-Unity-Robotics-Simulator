@@ -17,8 +17,8 @@ namespace Robotics.Simulator.Publisher
     [RequireComponent(typeof(RgbCamera))]
     public class RgbCameraImagePublisher : MonoBehaviour
     {
-        [SerializeField] private string topicName = "/camera/rgb/image/compressed";
-        [SerializeField] private string frameId = "camera_data";
+        [SerializeField] private string topicName = Topic.RgbCameraCompressedImage;
+        [SerializeField] private string frameId = FrameId.RgbCameraData;
 
         private ROSConnection _rosConnection;
         private RgbCamera _rgbCamera;

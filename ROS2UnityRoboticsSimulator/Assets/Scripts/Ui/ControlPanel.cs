@@ -19,6 +19,7 @@ namespace Ui
 
         private void Awake()
         {
+            _cmdVelPublisher = GetComponent<CmdVelPublisher>();
             AddEventTrigger(forwardButton, OnPointerDown, OnPointerUp);
             AddEventTrigger(backwardButton, OnPointerDown, OnPointerUp);
             AddEventTrigger(leftButton, OnPointerDown, OnPointerUp);
@@ -54,38 +55,27 @@ namespace Ui
             switch (buttonName)
             {
                 case "ForwardButton":
-                    Debug.Log("PointerDown Forward");
+                    _cmdVelPublisher.Forward();
                     break;
                 case "BackwardButton":
-                    Debug.Log("PointerDown Backward");
+                    _cmdVelPublisher.Backward();
                     break;
                 case "LeftButton":
-                    Debug.Log("PointerDown Left");
+                    _cmdVelPublisher.TurnLeft();
                     break;
                 case "RightButton":
-                    Debug.Log("PointerDown Right");
+                    _cmdVelPublisher.TurnRight();
                     break;
             }
+
+            _cmdVelPublisher.Publish();
         }
 
         private void OnPointerUp(string buttonName)
         {
             Debug.Log($"OnPointerUp {buttonName}");
-            switch (buttonName)
-            {
-                case "ForwardButton":
-                    Debug.Log("PointerUp Forward");
-                    break;
-                case "BackwardButton":
-                    Debug.Log("PointerUp Backward");
-                    break;
-                case "LeftButton":
-                    Debug.Log("PointerUp Left");
-                    break;
-                case "RightButton":
-                    Debug.Log("PointerUp Right");
-                    break;
-            }
+            _cmdVelPublisher.Stop();
+            _cmdVelPublisher.Publish();
         }
     }
 }

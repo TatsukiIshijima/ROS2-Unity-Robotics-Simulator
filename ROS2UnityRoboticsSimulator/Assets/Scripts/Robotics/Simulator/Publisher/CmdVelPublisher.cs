@@ -42,6 +42,12 @@ namespace Robotics.Simulator.Publisher
         {
             _twistMsg.angular.z = angularSpeed * ratio;
         }
+        
+        public void Stop()
+        {
+            _twistMsg.linear.x = 0;
+            _twistMsg.angular.z = 0;
+        }
 
         public void Publish()
         {

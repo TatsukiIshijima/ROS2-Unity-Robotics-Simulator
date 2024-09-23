@@ -1,4 +1,3 @@
-using System;
 using RosMessageTypes.Geometry;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
@@ -15,7 +14,7 @@ namespace Robotics.Simulator.Publisher
         [SerializeField] private float angularSpeed = 1.0f;
 
         private ROSConnection _rosConnection;
-        private TwistMsg _twistMsg = new();
+        private readonly TwistMsg _twistMsg = new();
 
         private void Awake()
         {

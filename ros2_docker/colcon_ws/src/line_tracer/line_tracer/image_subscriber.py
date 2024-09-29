@@ -4,9 +4,12 @@ from sensor_msgs.msg import CompressedImage
 from cv_bridge import CvBridge
 import cv2
 
+from line_tracer.processor import Processor
+
 """
 ros2 run line_tracer line_tracer
 """
+
 
 class ImageSubscriber(Node):
 
@@ -20,12 +23,17 @@ class ImageSubscriber(Node):
         )
         self.bridge = CvBridge()
 
+        self.processor = Processor()
+
     def listener_callback(self, msg):
         # self.get_logger().info('Image Received')
         frame = self.bridge.compressed_imgmsg_to_cv2(msg)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
-        cv2.imshow('RgbCameraImage', frame)
-        cv2.waitKey(1)
+        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
+        # cv2.imshow('RgbCameraImage', frame)
+        # cv2.waitKey(1)
+        self.processor.process(frame)
+        self.processor.show()
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -36,6 +44,7 @@ def main(args=None):
         pass
     image_subscriber.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

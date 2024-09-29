@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         "console_scripts": [
-            'line_tracer = line_tracer.subscriber:main'
+            'line_tracer = line_tracer.image_subscriber:main'
         ],
     },
 )

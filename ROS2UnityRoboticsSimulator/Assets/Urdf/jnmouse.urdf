@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot name="jnmouse">
+  <link name="base_footprint" />
+
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 0.00185" />
+    <parent link="base_footprint" />
+    <child link="base_link" />
+  </joint>
+
+  <link name="base_link">
+     <visual>
+      <geometry>
+        <mesh filename="package://jnmouse_description/meshes/dae/jnmouse_body.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.005 0 0.040" />
+      <geometry>
+        <box size="0.117 0.080 0.080" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <origin xyz="0 0.0425 0.02215" rpy="-1.57 0 0" />
+    <axis xyz="0 0 1" /> 
+    <parent link="base_link" />
+    <child link="left_wheel" />
+  </joint>
+  
+  <link name="left_wheel">
+     <visual>
+      <geometry>
+        <mesh filename="package://jnmouse_description/meshes/dae/jnmouse_wheel.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.003" />
+        <geometry>
+          <cylinder radius="0.024" length="0.010" />
+        </geometry>
+    </collision>
+  </link>
+  
+  <joint name="right_wheel_joint" type="continuous">
+    <origin xyz="0 -0.0425 0.02215" rpy="1.57 0 0" />
+    <axis xyz="0 0 1" /> 
+    <parent link="base_link" />
+    <child link="right_wheel" />
+  </joint>
+  
+  <link name="right_wheel">
+     <visual>
+      <geometry>
+        <mesh filename="package://jnmouse_description/meshes/dae/jnmouse_wheel.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.003" />
+        <geometry>
+          <cylinder radius="0.024" length="0.010" />
+        </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_camera_joint" type="fixed">
+    <origin xyz="0.06446622 -0.0285614 0.07966166" rpy="1.91986 0 1.57" />
+    <parent link="base_link" />
+    <child link="right_camera" />
+  </joint>
+
+  <link name="right_camera">
+    <collision>
+        <origin xyz="0 0 0.012" />
+        <geometry>
+          <cylinder radius="0.008" length="0.015" />
+        </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_camera_joint" type="fixed">
+    <origin xyz="0.06446622 0.0264386 0.07966166" rpy="1.91986 0 1.57" />
+    <parent link="base_link" />
+    <child link="left_camera" />
+  </joint>
+
+  <link name="left_camera">
+    <collision>
+        <origin xyz="0 0 0.012" />
+        <geometry>
+          <cylinder radius="0.008" length="0.015" />
+        </geometry>
+    </collision>
+  </link>
+
+</robot>

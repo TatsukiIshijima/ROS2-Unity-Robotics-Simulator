@@ -4,10 +4,14 @@ from sensor_msgs.msg import CompressedImage
 from cv_bridge import CvBridge
 import cv2
 
+"""
+ros2 run line_tracer line_tracer
+"""
+
 class ImageSubscriber(Node):
 
     def __init__(self):
-        super().__init__('image_subscriber')
+        super().__init__('line_tracker')
         self.subscription = self.create_subscription(
             CompressedImage,
             '/camera/rgb/image/compressed',

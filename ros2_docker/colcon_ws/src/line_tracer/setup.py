@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'image_recognizer'
+package_name = 'line_tracer'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         "console_scripts": [
-            'image_subscriber = image_recognizer.subscriber:main'
+            'line_tracer = line_tracer.subscriber:main'
         ],
     },
 )

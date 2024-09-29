@@ -8,7 +8,7 @@ DEST_DIR="ROS2UnityRoboticsSimulator/Assets/Urdf"
 # ROS2 URDF model packages
 # if you want to add more packages, add package name to PACKAGES_DIR_NAMES
 PACKAGES_DIR_NAMES=(
-    "jetsonmouse_description"
+    "jnmouse_description"
     "raspimouse_description"
     "realsense2_description"
 )

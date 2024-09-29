@@ -21,7 +21,7 @@ class ImageSubscriber(Node):
         self.bridge = CvBridge()
 
     def listener_callback(self, msg):
-        self.get_logger().info('Image Received')
+        # self.get_logger().info('Image Received')
         frame = self.bridge.compressed_imgmsg_to_cv2(msg)
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
         cv2.imshow('RgbCameraImage', frame)

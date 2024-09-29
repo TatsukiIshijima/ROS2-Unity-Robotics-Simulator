@@ -7,3 +7,6 @@
 [submodule "ros2_docker/colcon_ws/src/realsense2_description"]
 	path = ros2_docker/colcon_ws/src/realsense2_description
 	url = https://github.com/issaiass/realsense2_description.git
+[submodule "ros2_docker/colcon_ws/src/jnmouse_description"]
+	path = ros2_docker/colcon_ws/src/jnmouse_description
+	url = https://github.com/rt-net/jnmouse_description.git

@@ -1,6 +1,6 @@
+from cv_bridge import CvBridge
 from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage
-from cv_bridge import CvBridge
 
 
 class ImageSubscriber(Node):

@@ -3,6 +3,7 @@ import rclpy
 
 from line_tracer.line_tracer import LineTracer
 from line_tracer.image_subscriber import ImageSubscriber
+from line_tracer.processed_image_publisher import ProcessedImagePublisher
 
 """
 ros2 run line_tracer line_tracer
@@ -12,8 +13,8 @@ ros2 run line_tracer line_tracer
 def process_image(frame):
     line_tracker = LineTracer()
     frame, moment_cx, moment_cy = line_tracker.process(frame)
-    cv2.imshow('LineTracer', frame)
-    cv2.waitKey(1)
+    processed_image_publisher = ProcessedImagePublisher()
+    processed_image_publisher.publish(frame)
 
 
 def main(args=None):

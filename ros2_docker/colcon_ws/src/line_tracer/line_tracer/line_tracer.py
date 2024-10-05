@@ -2,8 +2,13 @@ import copy
 import cv2
 import numpy as np
 
+class Singleton(object):
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Singleton, cls).__new__(cls)
+        return cls.instance
 
-class LineTracer:
+class LineTracer(Singleton):
 
     def __init__(self):
         self._frame = None

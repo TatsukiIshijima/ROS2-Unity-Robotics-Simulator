@@ -2,11 +2,8 @@ import copy
 import cv2
 import numpy as np
 
-class Singleton(object):
-    def __new__(cls):
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(Singleton, cls).__new__(cls)
-        return cls.instance
+from line_tracer.singleton import Singleton
+
 
 class LineTracer(Singleton):
 
@@ -95,7 +92,7 @@ class LineTracer(Singleton):
 if __name__ == '__main__':
     line_tracer = LineTracer()
     # input image
-    frame = cv2.imread('frame_0.jpg')
+    frame = cv2.imread('xx.jpg')
     input_img = copy.deepcopy(frame)
     output_img, _, _ = line_tracer.process(input_img)
     cv2.imshow('Output', output_img)

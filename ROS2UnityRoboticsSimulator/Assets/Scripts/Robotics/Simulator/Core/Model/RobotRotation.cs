@@ -17,5 +17,10 @@ namespace Robotics.Simulator.Core.Model
         {
             return UnityEngine.Quaternion.Euler(x, y, z);
         }
+
+        public override string ToString()
+        {
+            return $"RobotRotation(x: {x}, y: {y}, z: {z})";
+        }
     }
 }

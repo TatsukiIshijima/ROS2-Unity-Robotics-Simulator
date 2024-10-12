@@ -1,6 +1,8 @@
+import os.path
+from glob import glob
 from setuptools import find_packages, setup
 
-package_name = 'image_recognizer'
+package_name = 'line_tracer'
 
 setup(
     name=package_name,
@@ -8,8 +10,13 @@ setup(
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+         ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        # Include all launch files.
+        (
+            os.path.join('share', package_name, 'launch'),
+            glob(os.path.join('launch', '*launch.[pxy][yma]*'))
+        )
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -20,7 +27,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         "console_scripts": [
-            'image_subscriber = image_recognizer.subscriber:main'
+            'main = line_tracer.main:main'
         ],
     },
 )

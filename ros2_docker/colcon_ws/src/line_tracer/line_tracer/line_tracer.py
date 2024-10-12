@@ -2,10 +2,8 @@ import copy
 import cv2
 import numpy as np
 
-from line_tracer.singleton import Singleton
 
-
-class LineTracer(Singleton):
+class LineTracer:
 
     def __init__(self):
         self._frame = None

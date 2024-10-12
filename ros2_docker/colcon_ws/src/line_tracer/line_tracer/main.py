@@ -1,6 +1,6 @@
 import math
-from shutil import posix
 
+import cv2
 import rclpy
 from geometry_msgs.msg import Twist
 
@@ -12,7 +12,6 @@ from line_tracer.processed_image_publisher import ProcessedImagePublisher
 """
 ros2 run line_tracer line_tracer
 """
-
 
 def process_image(frame):
     line_tracker = LineTracer()
@@ -29,8 +28,8 @@ def process_image(frame):
     else:
         half_width = frame.shape[1] / 2.0
         pos_x_rate = (half_width - moment_cx) / half_width
-        twist.angular.z = pos_x_rate * 0.25 * math.pi
-        print(f'twist.angular.z: {twist.angular.z}')
+        # 座標系の関係で反転するため-1をかけている
+        twist.angular.z = -1.0 * pos_x_rate * 0.05 * math.pi
 
     twist.linear.x = 0.05
     cmd_vel_publisher.publish(twist)

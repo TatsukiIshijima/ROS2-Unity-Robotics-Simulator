@@ -5,7 +5,7 @@ from cv_bridge import CvBridge
 from line_tracer.image_subscriber import ImageSubscriber
 
 """
-ros2 run line_tracer line_tracer
+ros2 run line_tracer main
 """
 
 

@@ -68,7 +68,7 @@ namespace Robotics.Simulator.Controller
             var newTransform = CalcRobotTransform(deltaTimeSeconds);
             robot.transform.position = newTransform.Position.ToVector3();
             robot.transform.rotation = newTransform.Rotation.ToQuaternion();
-            RotateWheels(deltaTimeSeconds);
+            // RotateWheels(deltaTimeSeconds);
         }
 
         private void DisableArticulationBody()
@@ -136,7 +136,7 @@ namespace Robotics.Simulator.Controller
             var newTransform = CalcRobotTransform(deltaTimeSeconds);
             robot.transform.position = newTransform.Position.ToVector3();
             robot.transform.rotation = newTransform.Rotation.ToQuaternion();
-            RotateWheels(deltaTimeSeconds);
+            // RotateWheels(deltaTimeSeconds);
         }
 
         private RobotTransform CalcRobotTransform(float deltaTimeSeconds)
@@ -158,8 +158,9 @@ namespace Robotics.Simulator.Controller
                 currentRobotPosition.y,
                 currentRobotPosition.z + deltaZ
             );
-
+            
             _theta += robotAngularSpeed * Mathf.Rad2Deg * deltaTimeSeconds;
+            _theta = Mathf.Repeat(_theta, 360.0f);
 
             var newRobotRotation = new RobotRotation(
                 currentRobotRotation.x,

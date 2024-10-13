@@ -1,10 +1,16 @@
-# Structure
+
+# ROS2-Unity-Robotics-Simulator
+![ROS](https://img.shields.io/badge/ros2-humble-brightgreen)
+![Unity](https://img.shields.io/badge/unity-2022.3.37f1-brightgreen)
+
+## Structure
 ```
 ROS2-Unity-Robotics-Simulator/
 ├── ros2_docker/
 │   └── colcon_ws/
 │       └── src/
 │           ├── jnmouse_description
+│           ├── line_tracer
 │           ├── raspimouse_description
 │           ├── realsense2_description
 │           └── ROS-TCP-Endpoint
@@ -20,9 +26,9 @@ ROS2-Unity-Robotics-Simulator/
 ```
 create by [tree.nathanfriend.id](https://tree.nathanfriend.io/)
 
-# Setup host（Ubuntu on Docker）
+## Setup host（Ubuntu on Docker）
 Dockerfile is based on [Tiryoh/docker-ros2-desktop-vnc/humble](https://github.com/Tiryoh/docker-ros2-desktop-vnc/tree/master/humble).
-## Build image and launch container
+### Build image and launch container
 1. Build ROS2 docker image if not create image.
 ```
 #cd ros2_docker
@@ -104,11 +110,5 @@ To import and use URDF on the Unity, use URDF-Importer. We need to copy the ROS2
 
 The URDF file and package will be copied under UnityProject/Assets/Urdf. Select the URDF file on Unity and execute “Import Robot from selected URDF file”. Then a URDF GameObject is created on the Scene.
 
-# Demos(WIP)
-## View camera image published by Unity(Robot)
-The RgbCamera script on the Unity converts the Texture to jpeg. The RgbCameraImagePublisher script converts the jpeg to a CompressedImageMsg in the ROS Message and publishes.
-
-The following is a command to subscribe to and view the camera images on the ROS.
-```
-ros2 run rqt_image_view rqt_image_view compressed "image/compressed:=/camera/rgb/image/compressed"
-```
+## Demos
+1. ### [Line Trace](docs/line_trace.md) 

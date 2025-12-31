@@ -9,6 +9,8 @@
     - Click on the bottom left system menu and select `System Tools > LXTerminal`
     - In the Terminal run:
         ```shell
+        cd colcon_ws
+        source install/setup.bash
         ros2 launch line_tracer line_tracer_launch.py
         ```
 

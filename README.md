@@ -1,7 +1,7 @@
 
 # ROS2-Unity-Robotics-Simulator
 ![ROS](https://img.shields.io/badge/ros2-humble-brightgreen)
-![Unity](https://img.shields.io/badge/unity-2022.3.37f1-brightgreen)
+![Unity](https://img.shields.io/badge/unity-2022.3.62f3-brightgreen)
 
 ## Structure
 ```

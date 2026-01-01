@@ -5,5 +5,6 @@ namespace Robotics.Simulator.Publisher
         public const string Clock = "clock";
         public const string CmdVel = "cmd_vel";
         public const string RgbCameraCompressedImage = "/camera/rgb/image/compressed";
+        public const string RaycastLidarScan = "/raycast_lidar/scan";
     }
 }

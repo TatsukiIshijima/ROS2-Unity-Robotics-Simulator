@@ -19,7 +19,7 @@ namespace Robotics.Simulator.Publisher
     {
         [Header("ROS Configuration")]
         [SerializeField] private string topicName = Topic.RaycastLidarScan;
-        [SerializeField] private string frameId = FrameId.RaycastLidarScanData;
+        [SerializeField] private string frameId = FrameId.Laser;
 
         [Header("LaserScan Configuration")]
         [SerializeField] private float scanFrequency = 5.5f; // Hz (RP-LIDAR A2: ~5.5Hz)

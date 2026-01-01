@@ -4,7 +4,10 @@ namespace Robotics.Simulator.Publisher
     {
         public const string RgbCameraData = "rgb_camera_data";
         public const string InfraredRangeData = "infrared_range_data";
-        // public const string RaycastLidarScanData = "raycast_lidar_scan_data";
-        public const string RaycastLidarScanData = "laser";
+
+        // TF Frame IDs for SLAM
+        public const string Map = "map";
+        public const string BaseLink = "base_link";
+        public const string Laser = "laser";
     }
 }

@@ -4975,6 +4975,8 @@ GameObject:
   - component: {fileID: 1465295201}
   - component: {fileID: 1465295200}
   - component: {fileID: 1465295199}
+  - component: {fileID: 1465295204}
+  - component: {fileID: 1465295203}
   m_Layer: 0
   m_Name: laser
   m_TagString: Untagged
@@ -5112,6 +5114,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 0
+--- !u!114 &1465295203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465295197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037e8236c0c034afebeb954ce801d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /raycast_lidar/scan
+  frameId: laser
+  scanFrequency: 5.5
+  rangeMin: 0.12
+  rangeMax: 12
+--- !u!114 &1465295204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465295197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c1d58c3c2fee7459d766d2a82ea877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frequency: 10
+  _scanPattern: {fileID: 11400000, guid: 8c8f441bff2ca48d6b872fb61cc06bc0, type: 2}
+  _pointsNumPerScan: 360
+  _minRange: 0.12
+  _maxRange: 12
+  _gaussianNoiseSigma: 0.01
+  _maxIntensity: 255
 --- !u!1 &1475620086
 GameObject:
   m_ObjectHideFlags: 0
